@@ -14,9 +14,9 @@
 
 
 
-    <h2>Audio Examples</h2>
-    <h3>Clean Audio Synthesis</h3>
-    <!-- <p>
+    <h1>Analysis of Differentiable Piano model</h2>
+
+    <p>
         Here you can listen to the audio samples reconstructed from the proposed codec at <b>1.38&thinsp;kbps</b> and
         <b>5.51&thinsp;kbps</b> on utterances by four different speakers (unseen during training) from the <b>VCTK
             dataset</b>.<br>
@@ -43,7 +43,9 @@
         Audio Codec," in IEEE/ACM Transactions on Audio, Speech, and Language Processing, vol. 30, 495-507.<br>
         [5] J.-M. Valin, G. Maxwell, T. B. Terriberry and K. Vos. 2013. High-quality, low-delay music coding in the Opus
         codec. In Proc. 135th Audio Engineering Society Convention, 1–10.
-    </font> -->
+    </font>
+
+    <h3>Clean Audio Synthesis</h3>
     <br>
     <br>
 
@@ -53,110 +55,53 @@
         <table>
             <tr>
                 <th></th>
-                <th>Clean</th>
-                <th>FFT</th>
-                <th>GriffinLim</th>
-                <th>HiFiGAN</th>
-                <th>BigVGAN tiny</th>
-                <th>BigVGAN base</th>
+                <th>piano 1</th>
+                <th>piano 2</th>
+                <th>piano 3</th>
+                <th>piano 4</th>
+                <th>piano 5</th>
+                <th>piano 6</th>
+                <th>piano 7</th>
+                <th>piano 8</th>
+                <th>piano 9</th>
+                <th>piano 10</th>
     
                 <tr>
                     <th align="left"> p237</th>
     
-                    <td><audio controls style="width: 250px;">
-                            <source src="files/p237_262_clean.wav" type="audio/flac">
+                    <td><audio controls style="width: 150px;">
+                            <source src="files/piano_models/demo_akkord_m1.wav" type="audio/flac">
                         </audio></td>
-                    <td><audio controls style="width: 250px;">
-                            <source src="files/p237_262_fft.wav" type="audio/flac">
+                    <td><audio controls style="width: 150px;">
+                            <source src="files/piano_models/demo_akkord_m2.wav" type="audio/flac">
                         </audio></td>
-                    <td><audio controls style="width: 250px;">
-                            <source src="files/p237_262_griffinLim.wav" type="audio/flac">
+                    <td><audio controls style="width: 150px;">
+                            <source src="files/piano_models/demo_akkord_m3.wav" type="audio/flac">
                         </audio></td>
-                    <td><audio controls style="width: 250px;">
-                            <source src="files/p237_262_HiFi.wav" type="audio/flac">
+                    <td><audio controls style="width: 150px;">
+                            <source src="files/piano_models/demo_akkord_m4.wav" type="audio/flac">
                         </audio></td>
-                    <td><audio controls style="width: 250px;">
-                            <source src="files/p237_262_bigvgan_tiny.wav" type="audio/flac">
+                    <td><audio controls style="width: 150px;">
+                            <source src="files/piano_models/demo_akkord_m5.wav" type="audio/flac">
                         </audio></td>
-                    <td><audio controls style="width: 250px;">
-                            <source src="files/p237_262_bigvgan_base.wav" type="audio/flac">
+                    <td><audio controls style="width: 150px;">
+                            <source src="files/piano_models/demo_akkord_m6.wav" type="audio/flac">
+                        </audio></td> 
+                    <td><audio controls style="width: 150px;">
+                            <source src="files/piano_models/demo_akkord_m7.wav" type="audio/flac">
+                        </audio></td> 
+                    <td><audio controls style="width: 150px;">
+                            <source src="files/piano_models/demo_akkord_m8.wav" type="audio/flac">
+                        </audio></td> 
+                    <td><audio controls style="width: 150px;">
+                            <source src="files/piano_models/demo_akkord_m9.wav" type="audio/flac">
+                        </audio></td> 
+                    <td><audio controls style="width: 150px;">
+                            <source src="files/piano_models/demo_akkord_m10.wav" type="audio/flac">
                         </audio></td>   
                     <!-- <td style="background-color: grey;"><audio controls style="width: 130px;">
                             <source src="rendered/p229_var16bit_finetuned.flac" type="audio/flac"> -->
                 </tr>
-            
-                
-                <tr>
-                    <th align="left"> p247</th>
-    
-                    <td><audio controls style="width: 250px;">
-                            <source src="files/p247_374_clean.wav" type="audio/wav">
-                        </audio></td>
-                    <td><audio controls style="width: 250px;">
-                            <source src="files/p247_374_fft.wav" type="audio/wav">
-                        </audio></td>
-                    <td><audio controls style="width: 250px;">
-                            <source src="files/p247_374_griffinLim.wav" type="audio/wav">
-                        </audio></td>
-                    <td><audio controls style="width: 250px;">
-                            <source src="files/p247_374_HiFi.wav" type="audio/wav">
-                        </audio></td>
-                    <td><audio controls style="width: 250px;">
-                            <source src="files/p247_374_bigvgan_tiny.wav" type="audio/wav">
-                        </audio></td>
-                    <td><audio controls style="width: 250px;">
-                            <source src="files/p247_374_bigvgan_base.wav" type="audio/wav">
-                        </audio></td>    
-                </tr>
-
-
-            <tr>
-                <th align="left"> p283</th>
-
-                    <td><audio controls style="width: 250px;">
-                            <source src="files/p283_423_clean.wav" type="audio/wav">
-                        </audio></td>
-                    <td><audio controls style="width: 250px;">
-                            <source src="files/p283_423_fft.wav" type="audio/wav">
-                        </audio></td>
-                    <td><audio controls style="width: 250px;">
-                            <source src="files/p283_423_griffinLim.wav" type="audio/wav">
-                        </audio></td>
-                    <td><audio controls style="width: 250px;">
-                            <source src="files/p283_423_HiFi.wav" type="audio/wav">
-                        </audio></td>
-                    <td><audio controls style="width: 250px;">
-                            <source src="files/p283_423_bigvgan_tiny.wav" type="audio/wav">
-                        </audio></td>
-                    <td><audio controls style="width: 250px;">
-                            <source src="files/p283_423_bigvgan_base.wav" type="audio/wav">
-                        </audio></td>
-            </tr>
-
-
-            <tr>
-                <th align="left"> p335</th>
-
-                    <td><audio controls style="width: 250px;">
-                            <source src="files/p335_342_clean.wav" type="audio/wav">
-                        </audio></td>
-                    <td><audio controls style="width: 250px;">
-                            <source src="files/p335_342_fft.wav" type="audio/wav">
-                        </audio></td>
-                    <td><audio controls style="width: 250px;">
-                            <source src="files/p335_342_griffinLim.wav" type="audio/wav">
-                        </audio></td>
-                    <td><audio controls style="width: 250px;">
-                            <source src="files/p335_342_HiFi.wav" type="audio/wav">
-                        </audio></td>
-                    <td><audio controls style="width: 250px;">
-                            <source src="files/p335_342_bigvgan_tiny.wav" type="audio/wav">
-                        </audio></td>
-                    <td><audio controls style="width: 250px;">
-                            <source src="files/p335_342_bigvgan_base.wav" type="audio/wav">
-                        </audio></td>
-            </tr>
-
         
         </table>
     </font>
