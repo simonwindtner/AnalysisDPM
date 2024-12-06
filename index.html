@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+    <!-- <p>
+        With the hyper-parameterization used for this demo, the proposed coding method's
+    <ul>
+        <li><b>algorithmic delay</b> only depends on the spectrogram window size and amounts to <b>768 samples at
+                22050&thinsp;Hz sampling frequency (34.8&thinsp;ms)</b>.</li>
+        <li>The <b>computational complexity at the encoding end</b> is <b>2.02&thinsp;GMAC/s</b>.</li>
+        <li>The <b>computational complexity at the decoding end</b> is <b>3.50&thinsp;GMAC/s</b>.</li>.
+    </ul>
+    </p> -->
+
+
+
+    <h2>Audio Examples</h2>
+    <h3>Clean Audio Synthesis</h3>
+    <!-- <p>
+        Here you can listen to the audio samples reconstructed from the proposed codec at <b>1.38&thinsp;kbps</b> and
+        <b>5.51&thinsp;kbps</b> on utterances by four different speakers (unseen during training) from the <b>VCTK
+            dataset</b>.<br>
+        For comparison to the proposed method (real-time, speech), the state-of-the-art codecs <a
+            href="https://ai.honu.io/papers/encodec/samples.html">EnCodec</a> [3] (real-time, general purpose), <a
+            href="https://opensource.googleblog.com/2022/09/lyra-v2-a-better-faster-and-more-versatile-speech-codec.html">Lyra&thinsp;v2</a>
+        [4] (real-time, speech), and <a href="https://opus-codec.org/">Opus</a> [5] (real-time, general purpose) are
+        included. <br>
+        <br>
+        The sampling rate with the proposed method is 22050&thinsp;Hz, with EnCodec it is 24&thinsp;kHz, with
+        Lyra&thinsp;v2 it is 16&thinsp;kHz. With Opus, 48&thinsp;kHz was used.<br>
+
+        The proposed method is highlighted.
+
+        For a fair comparison to Lyra&thinsp;v2, we also included a 16&thinsp;kHz downsampled versions of the reconstructions of the proposed coder.
+
+
+
+    </p>
+    <font size="2">
+        [3] A. Défossez, J. Copet, G. Synnaeve and Y. Adi. 2023. High Fidelity Neural Audio Compression. Transactions on
+        Machine Learning Research. 1-20.<br>
+        [4] N. Zeghidour, A. Luebs, A. Omran, J. Skoglund and M. Tagliasacchi. 2022. SoundStream: An End-to-End Neural
+        Audio Codec," in IEEE/ACM Transactions on Audio, Speech, and Language Processing, vol. 30, 495-507.<br>
+        [5] J.-M. Valin, G. Maxwell, T. B. Terriberry and K. Vos. 2013. High-quality, low-delay music coding in the Opus
+        codec. In Proc. 135th Audio Engineering Society Convention, 1–10.
+    </font> -->
+    <br>
+    <br>
+
+    <!-- <img src="Demo_Metrics.png" alt="SOTA comparison" width="1500px"> -->
+
+    <font size="2">
+        <table>
+            <tr>
+                <th></th>
+                <th>Clean</th>
+                <th>FFT</th>
+                <th>GriffinLim</th>
+                <th>HiFiGAN</th>
+                <th>BigVGAN tiny</th>
+                <th>BigVGAN base</th>
+    
+                <tr>
+                    <th align="left"> p237</th>
+    
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/p237_262_clean.wav" type="audio/flac">
+                        </audio></td>
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/p237_262_fft.wav" type="audio/flac">
+                        </audio></td>
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/p237_262_griffinLim.wav" type="audio/flac">
+                        </audio></td>
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/p237_262_HiFi.wav" type="audio/flac">
+                        </audio></td>
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/p237_262_bigvgan_tiny.wav" type="audio/flac">
+                        </audio></td>
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/p237_262_bigvgan_base.wav" type="audio/flac">
+                        </audio></td>   
+                    <!-- <td style="background-color: grey;"><audio controls style="width: 130px;">
+                            <source src="rendered/p229_var16bit_finetuned.flac" type="audio/flac"> -->
+                </tr>
+            
+                
+                <tr>
+                    <th align="left"> p247</th>
+    
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/p247_374_clean.wav" type="audio/wav">
+                        </audio></td>
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/p247_374_fft.wav" type="audio/wav">
+                        </audio></td>
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/p247_374_griffinLim.wav" type="audio/wav">
+                        </audio></td>
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/p247_374_HiFi.wav" type="audio/wav">
+                        </audio></td>
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/p247_374_bigvgan_tiny.wav" type="audio/wav">
+                        </audio></td>
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/p247_374_bigvgan_base.wav" type="audio/wav">
+                        </audio></td>    
+                </tr>
+
+
+            <tr>
+                <th align="left"> p283</th>
+
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/p283_423_clean.wav" type="audio/wav">
+                        </audio></td>
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/p283_423_fft.wav" type="audio/wav">
+                        </audio></td>
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/p283_423_griffinLim.wav" type="audio/wav">
+                        </audio></td>
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/p283_423_HiFi.wav" type="audio/wav">
+                        </audio></td>
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/p283_423_bigvgan_tiny.wav" type="audio/wav">
+                        </audio></td>
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/p283_423_bigvgan_base.wav" type="audio/wav">
+                        </audio></td>
+            </tr>
+
+
+            <tr>
+                <th align="left"> p335</th>
+
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/p335_342_clean.wav" type="audio/wav">
+                        </audio></td>
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/p335_342_fft.wav" type="audio/wav">
+                        </audio></td>
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/p335_342_griffinLim.wav" type="audio/wav">
+                        </audio></td>
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/p335_342_HiFi.wav" type="audio/wav">
+                        </audio></td>
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/p335_342_bigvgan_tiny.wav" type="audio/wav">
+                        </audio></td>
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/p335_342_bigvgan_base.wav" type="audio/wav">
+                        </audio></td>
+            </tr>
+
+        
+        </table>
+    </font>
+
+
+
+    <h3>Noisy MEL Coefficients</h3>
+    <!-- <p>
+        The proposed method allows for a variable number of bits to code each frame using a
+        single model.<br>
+        Below, fixed (one mode per bitrate) and variable-bitrate (single model) coding can be compared.<br>
+        Also, a vector-quantization baseline based on coding supervectors (by stacking every three successive frames of
+        the mel-spectrogram) using multiple stages of K-Means residual clustering is included.<br>
+        The VQ-baseline and proposed coder each use their own <b>fine-tuned vocoder</b> that has adapted to the distinct mel-spectrogram
+        quantization errors of each method.
+    </p> -->
+    <font size="2">
+        <table>
+            <tr>
+                <th></th>
+                <th>HiFiGAN</th>
+                <th>BigVGAN tiny</th>
+                <th>BigVGAN base</th>
+
+                <tr>
+                    <th align="left" , style="padding-right:20px;"> clean</th>
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/p237_262_HiFi.wav" type="audio/flac">
+                        </audio></td>
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/p237_262_bigvgan_tiny.wav" type="audio/flac">
+                        </audio></td>
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/p237_262_bigvgan_base.wav" type="audio/flac">
+                        </audio></td>
+                </tr>
+
+                <tr>
+                    <th align="left" , style="padding-right:20px;"> 5</th>
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/p237_262_HiFi_05.wav" type="audio/flac">
+                        </audio></td>
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/p237_262_bigvgan_tiny_05.wav" type="audio/flac">
+                        </audio></td>
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/p237_262_bigvgan_base_05.wav" type="audio/flac">
+                        </audio></td>
+                </tr>
+
+                <tr>
+                    <th align="left" , style="padding-right:20px;"> 10</th>
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/p237_262_HiFi_10.wav" type="audio/flac">
+                        </audio></td>
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/p237_262_bigvgan_tiny_10.wav" type="audio/flac">
+                        </audio></td>
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/p237_262_bigvgan_base_10.wav" type="audio/flac">
+                        </audio></td>
+                </tr>
+
+                <tr>
+                    <th align="left" , style="padding-right:20px;"> 15</th>
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/p237_262_HiFi_05.wav" type="audio/flac">
+                        </audio></td>
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/p237_262_bigvgan_tiny_15.wav" type="audio/flac">
+                        </audio></td>
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/p237_262_bigvgan_base_15.wav" type="audio/flac">
+                        </audio></td>
+                </tr>
+
+                <tr>
+                    <th align="left" , style="padding-right:20px;"> 20</th>
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/p237_262_HiFi_20.wav" type="audio/flac">
+                        </audio></td>
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/p237_262_bigvgan_tiny_20.wav" type="audio/flac">
+                        </audio></td>
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/p237_262_bigvgan_base_20.wav" type="audio/flac">
+                        </audio></td>
+                </tr>
+                <tr>
+                    <th align="left" , style="padding-right:20px;"> 25</th>
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/p237_262_HiFi_25.wav" type="audio/flac">
+                        </audio></td>
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/p237_262_bigvgan_tiny_25.wav" type="audio/flac">
+                        </audio></td>
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/p237_262_bigvgan_base_25.wav" type="audio/flac">
+                        </audio></td>
+                </tr>
+
+                <tr>
+                    <th align="left" , style="padding-right:20px;"> 35</th>
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/p237_262_HiFi_35.wav" type="audio/flac">
+                        </audio></td>
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/p237_262_bigvgan_tiny_35.wav" type="audio/flac">
+                        </audio></td>
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/p237_262_bigvgan_base_35.wav" type="audio/flac">
+                        </audio></td>
+                </tr>
+
+                <tr>
+                    <th align="left" , style="padding-right:20px;"> 45</th>
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/p237_262_HiFi_45.wav" type="audio/flac">
+                        </audio></td>
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/p237_262_bigvgan_tiny_45.wav" type="audio/flac">
+                        </audio></td>
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/p237_262_bigvgan_base_45.wav" type="audio/flac">
+                        </audio></td>
+                </tr>
+            </tr>
+
+        </table>
+    </font>
+
+
+    <h3>Deep Filter Net applied to white guassian noise speech samples, with 20dB SNR, and synthesized with different vocoders</h3>
+
+    <font size="2">
+        <table>
+            <tr>
+                <th></th>
+                <th>Clean</th>
+                <th>Noisy</th>
+                <th>DFN</th>
+                <th>HiFiGAN</th>
+                <th>BigVGAN tiny</th>
+                <th>BigVGAN base</th>
+    
+                <tr>
+                    <th align="left"> p237</th>
+    
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/DFN/p237_016.wav" type="audio/flac">
+                        </audio></td>
+                     <td><audio controls style="width: 250px;">
+                            <source src="files/DFN_GN/p237_016_GN.wav" type="audio/flac">
+                        </audio></td>
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/DFN_GN/p237_016_GN_DFN.wav" type="audio/flac">
+                        </audio></td>
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/DFN_GN/p237_016_GN_HiFiGAN.wav" type="audio/flac">
+                        </audio></td>
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/DFN_GN/p237_016_GN_BigVGAN_tiny.wav" type="audio/flac">
+                        </audio></td>
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/DFN_GN/p237_016_GN_BigVGAN_base.wav" type="audio/flac">
+                        </audio></td>   
+                    <!-- <td style="background-color: grey;"><audio controls style="width: 130px;">
+                            <source src="rendered/p229_var16bit_finetuned.flac" type="audio/flac"> -->
+                </tr>
+            
+                
+                <tr>
+                    <th align="left"> p247</th>
+    
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/DFN/p247_131.wav" type="audio/wav">
+                        </audio></td>
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/DFN_GN/p247_131_GN.wav" type="audio/wav">
+                        </audio></td>
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/DFN_GN/p247_131_GN_DFN.wav" type="audio/wav">
+                        </audio></td>
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/DFN_GN/p247_131_GN_HiFiGAN.wav" type="audio/wav">
+                        </audio></td>
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/DFN_GN/p247_131_GN_BigVGAN_tiny.wav" type="audio/wav">
+                        </audio></td>
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/DFN_GN/p247_131_GN_BigVGAN_base.wav" type="audio/wav">
+                        </audio></td>    
+                </tr>
+
+
+            <tr>
+                <th align="left"> p283</th>
+
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/DFN/p283_006.wav" type="audio/wav">
+                        </audio></td>
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/DFN_GN/p283_006_GN.wav" type="audio/wav">
+                        </audio></td>
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/DFN_GN/p283_006_GN_DFN.wav" type="audio/wav">
+                        </audio></td>
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/DFN_GN/p283_006_GN_HiFiGAN.wav" type="audio/wav">
+                        </audio></td>
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/DFN_GN/p283_006_GN_BigVGAN_tiny.wav" type="audio/wav">
+                        </audio></td>
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/DFN_GN/p283_006_GN_BigVGAN_base.wav" type="audio/wav">
+                        </audio></td>
+            </tr>
+
+
+            <tr>
+                <th align="left"> p335</th>
+
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/DFN/p335_006.wav" type="audio/wav">
+                        </audio></td>
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/DFN_GN/p335_006_GN.wav" type="audio/wav">
+                        </audio></td>
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/DFN_GN/p335_006_GN_DFN.wav" type="audio/wav">
+                        </audio></td>
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/DFN_GN/p335_006_GN_HiFiGAN.wav" type="audio/wav">
+                        </audio></td>
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/DFN_GN/p335_006_GN_BigVGAN_tiny.wav" type="audio/wav">
+                        </audio></td>
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/DFN_GN/p335_006_GN_BigVGAN_base.wav" type="audio/wav">
+                        </audio></td>
+            </tr>
+
+        
+        </table>
+    </font>
+
+
+    <h3>Deep Filter Net applied to noisy and reverberent speech samples and synthesized ERB gain enhanced spectrogram with different vocoders</h3>
+
+    <font size="2">
+        <table>
+            <tr>
+                <th></th>
+                <th>Clean</th>
+                <th>Noisy</th>
+                <th>DFN</th>
+                <th>HiFiGAN</th>
+                <th>BigVGAN tiny</th>
+                <th>BigVGAN base</th>
+    
+                <tr>
+                    <th align="left"> p237</th>
+    
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/DFN/p237_016.wav" type="audio/flac">
+                        </audio></td>
+                     <td><audio controls style="width: 250px;">
+                            <source src="files/DFN/p237_016_NR.wav" type="audio/flac">
+                        </audio></td>
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/DFN/p237_016_DFN.wav" type="audio/flac">
+                        </audio></td>
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/DFN/p237_016_HiFiGAN.wav" type="audio/flac">
+                        </audio></td>
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/DFN/p237_016_BigVGAN_tiny.wav" type="audio/flac">
+                        </audio></td>
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/DFN/p237_016_BigVGAN_base.wav" type="audio/flac">
+                        </audio></td>   
+                    <!-- <td style="background-color: grey;"><audio controls style="width: 130px;">
+                            <source src="rendered/p229_var16bit_finetuned.flac" type="audio/flac"> -->
+                </tr>
+            
+                
+                <tr>
+                    <th align="left"> p247</th>
+    
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/DFN/p247_131.wav" type="audio/wav">
+                        </audio></td>
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/DFN/p247_131_NR.wav" type="audio/wav">
+                        </audio></td>
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/DFN/p247_131_DFN.wav" type="audio/wav">
+                        </audio></td>
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/DFN/p247_131_HiFiGAN.wav" type="audio/wav">
+                        </audio></td>
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/DFN/p247_131_BigVGAN_tiny.wav" type="audio/wav">
+                        </audio></td>
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/DFN/p247_131_BigVGAN_base.wav" type="audio/wav">
+                        </audio></td>    
+                </tr>
+
+
+            <tr>
+                <th align="left"> p283</th>
+
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/DFN/p283_006.wav" type="audio/wav">
+                        </audio></td>
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/DFN/p283_006_NR.wav" type="audio/wav">
+                        </audio></td>
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/DFN/p283_006_DFN.wav" type="audio/wav">
+                        </audio></td>
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/DFN/p283_006_HiFiGAN.wav" type="audio/wav">
+                        </audio></td>
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/DFN/p283_006_BigVGAN_tiny.wav" type="audio/wav">
+                        </audio></td>
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/DFN/p283_006_BigVGAN_base.wav" type="audio/wav">
+                        </audio></td>
+            </tr>
+
+
+            <tr>
+                <th align="left"> p335</th>
+
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/DFN/p335_006.wav" type="audio/wav">
+                        </audio></td>
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/DFN/p335_006_NR.wav" type="audio/wav">
+                        </audio></td>
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/DFN/p335_006_DFN.wav" type="audio/wav">
+                        </audio></td>
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/DFN/p335_006_HiFiGAN.wav" type="audio/wav">
+                        </audio></td>
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/DFN/p335_006_BigVGAN_tiny.wav" type="audio/wav">
+                        </audio></td>
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/DFN/p335_006_BigVGAN_base.wav" type="audio/wav">
+                        </audio></td>
+            </tr>
+
+        
+        </table>
+    </font>
+
+
+    <h3>Deep Filter Net applied to noisy and reverberent speech samples synthesized ERB gain enhanced and complexed filtered spectrogram with different vocoders</h3>
+
+    <font size="2">
+        <table>
+            <tr>
+                <th></th>
+                <th>Clean</th>
+                <th>Noisy</th>
+                <th>DFN</th>
+                <th>HiFiGAN</th>
+                <th>BigVGAN tiny</th>
+                <th>BigVGAN base</th>
+    
+                <tr>
+                    <th align="left"> p237</th>
+    
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/DFN/p237_016.wav" type="audio/flac">
+                        </audio></td>
+                     <td><audio controls style="width: 250px;">
+                            <source src="files/DFN/p237_016_NR.wav" type="audio/flac">
+                        </audio></td>
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/DFN_Comp/p237_016_DFN.wav" type="audio/flac">
+                        </audio></td>
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/DFN_Comp/p237_016_HiFiGAN.wav" type="audio/flac">
+                        </audio></td>
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/DFN_Comp/p237_016_BigVGAN_tiny.wav" type="audio/flac">
+                        </audio></td>
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/DFN_Comp/p237_016_BigVGAN_base.wav" type="audio/flac">
+                        </audio></td>   
+                    <!-- <td style="background-color: grey;"><audio controls style="width: 130px;">
+                            <source src="rendered/p229_var16bit_finetuned.flac" type="audio/flac"> -->
+                </tr>
+            
+                
+                <tr>
+                    <th align="left"> p247</th>
+    
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/DFN/p247_131.wav" type="audio/wav">
+                        </audio></td>
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/DFN/p247_131_NR.wav" type="audio/wav">
+                        </audio></td>
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/DFN_Comp/p247_131_DFN.wav" type="audio/wav">
+                        </audio></td>
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/DFN_Comp/p247_131_HiFiGAN.wav" type="audio/wav">
+                        </audio></td>
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/DFN_Comp/p247_131_BigVGAN_tiny.wav" type="audio/wav">
+                        </audio></td>
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/DFN_Comp/p247_131_BigVGAN_base.wav" type="audio/wav">
+                        </audio></td>    
+                </tr>
+
+
+            <tr>
+                <th align="left"> p283</th>
+
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/DFN/p283_006.wav" type="audio/wav">
+                        </audio></td>
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/DFN/p283_006_NR.wav" type="audio/wav">
+                        </audio></td>
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/DFN_Comp/p283_006_DFN.wav" type="audio/wav">
+                        </audio></td>
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/DFN_Comp/p283_006_HiFiGAN.wav" type="audio/wav">
+                        </audio></td>
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/DFN_Comp/p283_006_BigVGAN_tiny.wav" type="audio/wav">
+                        </audio></td>
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/DFN_Comp/p283_006_BigVGAN_base.wav" type="audio/wav">
+                        </audio></td>
+            </tr>
+
+
+            <tr>
+                <th align="left"> p335</th>
+
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/DFN/p335_006.wav" type="audio/wav">
+                        </audio></td>
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/DFN/p335_006_NR.wav" type="audio/wav">
+                        </audio></td>
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/DFN_Comp/p335_006_DFN.wav" type="audio/wav">
+                        </audio></td>
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/DFN_Comp/p335_006_HiFiGAN.wav" type="audio/wav">
+                        </audio></td>
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/DFN_Comp/p335_006_BigVGAN_tiny.wav" type="audio/wav">
+                        </audio></td>
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/DFN_Comp/p335_006_BigVGAN_base.wav" type="audio/wav">
+                        </audio></td>
+            </tr>
+
+        
+        </table>
+    </font>
+
+<!--
+    <font size="2">
+        <table>
+            <tr>
+                <th></th>
+                <th>Clean</th>
+                <th>Noisy</th>
+                <th>DFN</th>
+                <th>HiFiGAN</th>
+                <th>BigVGAN tiny</th>
+                <th>BigVGAN base</th>
+    
+                <tr>
+                    <th align="left"> p237</th>
+    
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/p237_262_clean.wav" type="audio/flac">
+                        </audio></td>
+                     <td><audio controls style="width: 250px;">
+                            <source src="files/p237_262_Noisy.wav" type="audio/flac">
+                        </audio></td>
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/p237_262_DFN_full.wav" type="audio/flac">
+                        </audio></td>
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/p237_262_DFN_HiFi.wav" type="audio/flac">
+                        </audio></td>
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/p237_262_DFN_bigvgan_tiny.wav" type="audio/flac">
+                        </audio></td>
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/p237_262_DFN_bigvgan_base.wav" type="audio/flac">
+                        </audio></td>   
+                    <!-- <td style="background-color: grey;"><audio controls style="width: 130px;">
+                            <source src="rendered/p229_var16bit_finetuned.flac" type="audio/flac">
+                </tr>
+            
+                
+                <tr>
+                    <th align="left"> p247</th>
+    
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/p247_374_clean.wav" type="audio/wav">
+                        </audio></td>
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/p247_374_Noisy.wav" type="audio/wav">
+                        </audio></td>
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/p247_374_DFN_full.wav" type="audio/wav">
+                        </audio></td>
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/p247_374_DFN_HiFi.wav" type="audio/wav">
+                        </audio></td>
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/p247_374_DFN_bigvgan_tiny.wav" type="audio/wav">
+                        </audio></td>
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/p247_374_DFN_bigvgan_base.wav" type="audio/wav">
+                        </audio></td>    
+                </tr>
+
+
+            <tr>
+                <th align="left"> p283</th>
+
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/p283_423_clean.wav" type="audio/wav">
+                        </audio></td>
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/p283_423_Noisy.wav" type="audio/wav">
+                        </audio></td>
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/p283_423_DFN_full.wav" type="audio/wav">
+                        </audio></td>
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/p283_423_DFN_HiFi.wav" type="audio/wav">
+                        </audio></td>
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/p283_423_DFN_bigvgan_tiny.wav" type="audio/wav">
+                        </audio></td>
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/p283_423_DFN_bigvgan_base.wav" type="audio/wav">
+                        </audio></td>
+            </tr>
+
+
+            <tr>
+                <th align="left"> p335</th>
+
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/p335_342_clean.wav" type="audio/wav">
+                        </audio></td>
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/p335_342_Noisy.wav" type="audio/wav">
+                        </audio></td>
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/p335_342_DFN_full.wav" type="audio/wav">
+                        </audio></td>
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/p335_342_DFN_HiFi.wav" type="audio/wav">
+                        </audio></td>
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/p335_342_DFN_bigvgan_tiny.wav" type="audio/wav">
+                        </audio></td>
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/p335_342_DFN_bigvgan_base.wav" type="audio/wav">
+                        </audio></td>
+            </tr>
+
+        
+        </table>
+    </font>
+-->
+
+    <br>
+    <p>Created by Simon Windtner, IEM, 2024. For questions please contact windtner@iem.at</p>
+</body>
+
+</html>
