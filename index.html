@@ -180,7 +180,7 @@
     </font>
 
     <p>
-        Furthermoe, we investigated if the context vector is able to model resonance between multiple strings. We present a underlying C3 and will investiagte the resonance behaviour with a lower G3 and a higher G4.
+        Furthermore, we investigated if the context vector is able to model resonance between multiple strings. We present a underlying C3 and will investiagte the resonance behaviour with a lower G3 and a higher G4.
     </p>
 
     <font size="2">
@@ -207,126 +207,122 @@
         </table>
     </font>
 
+<!--vibrato_2 2Hz, vibrato_3 10 hz, amplitude = 1,  velocity = 1-->
+
 
 <!-- #####################################################################################################################################  -->
-    <h3>Noisy MEL Coefficients</h3>
-    <!-- <p>
-        The proposed method allows for a variable number of bits to code each frame using a
-        single model.<br>
-        Below, fixed (one mode per bitrate) and variable-bitrate (single model) coding can be compared.<br>
-        Also, a vector-quantization baseline based on coding supervectors (by stacking every three successive frames of
-        the mel-spectrogram) using multiple stages of K-Means residual clustering is included.<br>
-        The VQ-baseline and proposed coder each use their own <b>fine-tuned vocoder</b> that has adapted to the distinct mel-spectrogram
-        quantization errors of each method.
-    </p> -->
+    <h3>Explorational Study </h3>
+    <p>
+        In the following examples different kind of experiments were performed. In the first experiment we add or subtracted the PCA vector from the original z-vector with a scalar multiplier of 100.
+    </p>
     <font size="2">
         <table>
             <tr>
                 <th></th>
-                <th>HiFiGAN</th>
-                <th>BigVGAN tiny</th>
-                <th>BigVGAN base</th>
+                <th>plus PCA vector</th>
+                <th>minus PCA vector </th>
+
 
                 <tr>
-                    <th align="left" , style="padding-right:20px;"> clean</th>
+                    <th align="left" , style="padding-right:20px;"> PCA component 1</th>
                     <td><audio controls style="width: 250px;">
-                            <source src="files/p237_262_HiFi.wav" type="audio/flac">
+                            <source src="files/explorationell_study/z_vector/model0_plus_100_pca0.wav" type="audio/flac">
                         </audio></td>
                     <td><audio controls style="width: 250px;">
-                            <source src="files/p237_262_bigvgan_tiny.wav" type="audio/flac">
-                        </audio></td>
-                    <td><audio controls style="width: 250px;">
-                            <source src="files/p237_262_bigvgan_base.wav" type="audio/flac">
+                            <source src="files/explorationell_study/z_vector/model0_minus_100_pca0.wav" type="audio/flac">
                         </audio></td>
                 </tr>
 
                 <tr>
-                    <th align="left" , style="padding-right:20px;"> 5</th>
+                    <th align="left" , style="padding-right:20px;"> PCA component 2</th>
                     <td><audio controls style="width: 250px;">
-                            <source src="files/p237_262_HiFi_05.wav" type="audio/flac">
+                            <source src="files/explorationell_study/z_vector/model0_plus_100_pca1.wav" type="audio/flac">
                         </audio></td>
                     <td><audio controls style="width: 250px;">
-                            <source src="files/p237_262_bigvgan_tiny_05.wav" type="audio/flac">
-                        </audio></td>
-                    <td><audio controls style="width: 250px;">
-                            <source src="files/p237_262_bigvgan_base_05.wav" type="audio/flac">
+                            <source src="files/explorationell_study/z_vector/model0_minus_100_pca1.wav" type="audio/flac">
                         </audio></td>
                 </tr>
 
                 <tr>
-                    <th align="left" , style="padding-right:20px;"> 10</th>
+                    <th align="left" , style="padding-right:20px;"> PCA component 3</th>
                     <td><audio controls style="width: 250px;">
-                            <source src="files/p237_262_HiFi_10.wav" type="audio/flac">
+                            <source src="files/explorationell_study/z_vector/model0_plus_100_pca2.wav" type="audio/flac">
                         </audio></td>
                     <td><audio controls style="width: 250px;">
-                            <source src="files/p237_262_bigvgan_tiny_10.wav" type="audio/flac">
+                            <source src="files/explorationell_study/z_vector/model0_minus_100_pca2.wav" type="audio/flac">
+                        </audio></td>
+                </tr>
+            </tr>
+
+        </table>
+    </font>
+
+    <p>
+        In the next examples we changed the global inharmonicity and the global detuning.
+    </p>
+
+    <font size="2">
+        <table>
+            <tr>
+                <th></th>
+                <th>Klavierkonzert op.54 R. - Schumann</th>
+                <th>Wanderer Fantasie op.15 - F. Schubert </th>
+                <th>Concert suite from the ballet "The Nutcracker" - P.I. Tchaikovsky</th>
+                <th>Prelude and Fugue in , BWV 848 - J.S. Bach</th>
+
+
+                <tr>
+                    <th align="left" , style="padding-right:20px;"> Ground Truth</th>
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/explorationell_study/inharm_detuning/KK_Schumann_groundtruth.mp3" type="audio/flac">
                         </audio></td>
                     <td><audio controls style="width: 250px;">
-                            <source src="files/p237_262_bigvgan_base_10.wav" type="audio/flac">
+                            <source src=""" type="audio/flac">
+                        </audio></td>
+                    <td><audio controls style="width: 250px;">
+                            <source src=""" type="audio/flac">
+                        </audio></td>
+                    <td><audio controls style="width: 250px;">
+                            <source src=""" type="audio/flac">
+                        </audio></td> 
+                </tr>
+
+                <tr>
+                    <th align="left" , style="padding-right:20px;"> Global Inharmonicity 250</th>
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/explorationell_study/inharm_detuning/KK_Schumann_exp_inharm250.wav" type="audio/flac">
+                        </audio></td>
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/explorationell_study/inharm_detuning/Maestro_midi1_inharm_250.wav" type="audio/flac">
+                        </audio></td>
+                    <td><audio controls style="width: 250px;">
+                            <source src="files/explorationell_study/inharm_detuning/Maestro_midi2_inharm_250.wav" type="audio/flac">
                         </audio></td>
                 </tr>
 
                 <tr>
-                    <th align="left" , style="padding-right:20px;"> 15</th>
+                    <th align="left" , style="padding-right:20px;"> Global Inharmonicity 250</th>
                     <td><audio controls style="width: 250px;">
-                            <source src="files/p237_262_HiFi_05.wav" type="audio/flac">
+                            <source src="files/explorationell_study/inharm_detuning/KK_Schumann_exp_inharm500.wav" type="audio/flac">
                         </audio></td>
                     <td><audio controls style="width: 250px;">
-                            <source src="files/p237_262_bigvgan_tiny_15.wav" type="audio/flac">
+                            <source src="files/explorationell_study/inharm_detuning/Maestro_midi1_inharm_500.wav" type="audio/flac">
                         </audio></td>
                     <td><audio controls style="width: 250px;">
-                            <source src="files/p237_262_bigvgan_base_15.wav" type="audio/flac">
-                        </audio></td>
-                </tr>
-
-                <tr>
-                    <th align="left" , style="padding-right:20px;"> 20</th>
-                    <td><audio controls style="width: 250px;">
-                            <source src="files/p237_262_HiFi_20.wav" type="audio/flac">
-                        </audio></td>
-                    <td><audio controls style="width: 250px;">
-                            <source src="files/p237_262_bigvgan_tiny_20.wav" type="audio/flac">
-                        </audio></td>
-                    <td><audio controls style="width: 250px;">
-                            <source src="files/p237_262_bigvgan_base_20.wav" type="audio/flac">
-                        </audio></td>
-                </tr>
-                <tr>
-                    <th align="left" , style="padding-right:20px;"> 25</th>
-                    <td><audio controls style="width: 250px;">
-                            <source src="files/p237_262_HiFi_25.wav" type="audio/flac">
-                        </audio></td>
-                    <td><audio controls style="width: 250px;">
-                            <source src="files/p237_262_bigvgan_tiny_25.wav" type="audio/flac">
-                        </audio></td>
-                    <td><audio controls style="width: 250px;">
-                            <source src="files/p237_262_bigvgan_base_25.wav" type="audio/flac">
+                            <source src="files/explorationell_study/inharm_detuning/Maestro_midi2_inharm_500.wav" type="audio/flac">
                         </audio></td>
                 </tr>
 
                 <tr>
-                    <th align="left" , style="padding-right:20px;"> 35</th>
+                    <th align="left" , style="padding-right:20px;"> Global Detuning</th>
                     <td><audio controls style="width: 250px;">
-                            <source src="files/p237_262_HiFi_35.wav" type="audio/flac">
+                            <source src="files/explorationell_study/inharm_detuning/KK_Schumann_exp_detuning2000000.wav" type="audio/flac">
                         </audio></td>
                     <td><audio controls style="width: 250px;">
-                            <source src="files/p237_262_bigvgan_tiny_35.wav" type="audio/flac">
+                            <source src="files/explorationell_study/inharm_detuning/Maestro_midi1_detuning_2000000.wav" type="audio/flac">
                         </audio></td>
                     <td><audio controls style="width: 250px;">
-                            <source src="files/p237_262_bigvgan_base_35.wav" type="audio/flac">
-                        </audio></td>
-                </tr>
-
-                <tr>
-                    <th align="left" , style="padding-right:20px;"> 45</th>
-                    <td><audio controls style="width: 250px;">
-                            <source src="files/p237_262_HiFi_45.wav" type="audio/flac">
-                        </audio></td>
-                    <td><audio controls style="width: 250px;">
-                            <source src="files/p237_262_bigvgan_tiny_45.wav" type="audio/flac">
-                        </audio></td>
-                    <td><audio controls style="width: 250px;">
-                            <source src="files/p237_262_bigvgan_base_45.wav" type="audio/flac">
+                            <source src="files/explorationell_study/inharm_detuning/Maestro_midi2_detuning_2000000.wav" type="audio/flac">
                         </audio></td>
                 </tr>
             </tr>
