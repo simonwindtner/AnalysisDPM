@@ -1,6 +1,7 @@
 # README
 The current readme file shortly explains the provided python environment.
-First of all the function relys on the publication of *L. Renault et al.* and can be fully discovered in his [github repo](https://github.com/lrenault/ddsp-piano).
+The provided python notebook is based on the publication of *L. Renault et al. [DIFFERENTIABLE PIANO MODEL FOR MIDI-TO-AUDIO PERFORMANCE SYNTHESIS](https://dafx2020.mdw.ac.at/proceedings/papers/DAFx20in22_paper_48.pdf)*  \\
+The whole synthesizer model is available on the [github repo](https://github.com/lrenault/ddsp-piano) of *L. Renault et al.*. \\
 
 We provide a ipython notebook for easy access with multiply modifications functions. 
 Furthermore, helper functions are provided in "ADP_utils.py". Additional functions for plots are provided in "ADP_plots.py". 
