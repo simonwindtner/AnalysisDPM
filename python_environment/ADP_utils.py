@@ -153,4 +153,23 @@ def create_midi_and_synthesize(notedict, model, duration, piano_type, notenumber
             dill.dump(output, file)
     return output
 
+def create_midi_and_synthesize_glissando(notedict, model, duration, piano_type, stepsize):
+    outfile = "Glissando_demo_new.mid"
+    create_simple_midi_file(notedict, outfile = outfile)
+    inputs = load_midi_as_conditioning(outfile, duration=duration)
+    start_idx = np.where(inputs['conditioning'][0,:,:,0] > 0)[0][0]
+    length_conditioning = inputs["conditioning"].shape[1]
+    start_note = inputs['conditioning'][0,start_idx,0,0]
+    note_ascending = True
+    for i in range(start_idx, length_conditioning, stepsize):
+        inputs["conditioning"][0,i:i+stepsize,0,0] = np.linspace(start_note, start_note +1, stepsize,dtype=float)
+        if note_ascending:
+            start_note += 1
+        else:
+            start_note -= 1
+        if start_note > 108:
+            note_ascending = False
+    inputs['piano_model'] = tf.convert_to_tensor([[piano_type]])
+    return model(inputs)
+
 
